@@ -6,13 +6,14 @@ export default {
     ability: Ability
   },
   provide() {
-    // const { ability } = this;
+    const { ability } = this;
     return {
-      ability: {}
+      ability: ability || undefined
     };
   },
   render(_) {
-    return _(this.$slots.default);
+    return this.$slots.default[0];
+    // return _('div');
   }
 };
 
