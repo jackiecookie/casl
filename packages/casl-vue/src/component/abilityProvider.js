@@ -12,7 +12,7 @@ export default {
     };
   },
   render(_) {
-    return this.$slots.default[0];
+    return _('div', {}, this.$slots.default);
     // return _('div');
   }
 };

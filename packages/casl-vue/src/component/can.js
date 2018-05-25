@@ -11,13 +11,16 @@ export default {
     this: String,
   },
   render(createElement) {
-    return this.check() && createElement(this.$children, this.data);
+    return this.check() && createElement('div', {}, this.$slots.default);
   },
-  check() {
-    const [action, field] = this.I.split(/\s+/);
-    const subject = this.of || this.a || this.this || this.on;
-    const ability = this.ability || this.$ability;
-    return ability.can(action, subject, field);
+  methods: {
+    check() {
+      const [action, field] = this.I.split(/\s+/);
+      const subject = this.of || this.a || this.this || this.on;
+      const ability = this.ability || this.$ability;
+      return ability.can(action, subject, field);
+    }
   }
+
 };
 
