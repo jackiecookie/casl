@@ -12,8 +12,6 @@ export default {
     };
   },
   render(_) {
-    return _('div', {}, this.$slots.default);
-    // return _('div');
+    return _(this.$slots.default[0]);
   }
 };
-
