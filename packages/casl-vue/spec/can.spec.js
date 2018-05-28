@@ -1,6 +1,10 @@
+import chai from 'chai';
 import { createLocalVue, mount } from '@vue/test-utils';
 import { AbilityBuilder, Ability } from '@casl/ability';
 import { abilitiesPlugin } from '../src';
+
+
+const should = chai.should();
 
 
 describe('vue Can component', () => {
@@ -96,6 +100,24 @@ describe('vue Can component', () => {
     });
     it('use ability from plugin', () => {
       expect(wrapper.contains('h1')).to.equal(true);
+    });
+  });
+
+  describe('Validation props', () => {
+    const spy = chai.spy.on(console, 'error');
+
+    it('lack action', () => {
+      const Component = {
+        template: `
+                    <Can of = 'Plugin'>
+                      <h1></h1>
+                    </Can>
+        `
+      };
+      const wrapper = mount(Component, {
+        localVue
+      });
+      spy.should.have.been.called();
     });
   });
 });
