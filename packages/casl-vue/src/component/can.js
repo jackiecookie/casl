@@ -14,8 +14,12 @@ export default {
   render(createElement, {
     props, children, parent, injections
   }) {
-    injections.ability.watcherForComponent.rules =
-    injections.ability.watcherForComponent.rules; // create dependency
+    if (injections.ability) {
+      injections.ability.watcherForComponent.rules =
+      injections.ability.watcherForComponent.rules; // create dependency
+    } else {
+      parent.$can(); // also create dependency
+    }
     const checkContext = {
       ability: injections.ability,
       ...props,

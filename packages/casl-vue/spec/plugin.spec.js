@@ -20,6 +20,7 @@ describe('Abilities plugin', () => {
     });
   });
 
+
   describe('when ability is provided', () => {
     beforeEach(() => {
       ability = AbilityBuilder.define(can => can('read', 'Post'));
@@ -33,6 +34,10 @@ describe('Abilities plugin', () => {
 
     it('defines `$ability` instance for all components', () => {
       expect(vm.$ability).to.equal(ability);
+    });
+
+    it('defines `$defineAbility` function for all components', () => {
+      expect(vm.$defineAbility).to.be.a('function');
     });
   });
 
