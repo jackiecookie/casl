@@ -1,9 +1,10 @@
 import chai from 'chai';
+import spies from 'chai-spies';
 import { createLocalVue, mount } from '@vue/test-utils';
 import { AbilityBuilder, Ability } from '@casl/ability';
 import { abilitiesPlugin } from '../src';
 
-
+chai.use(spies);
 const should = chai.should();
 
 
@@ -106,10 +107,52 @@ describe('vue Can component', () => {
   describe('Validation props', () => {
     const spy = chai.spy.on(console, 'error');
 
-    it('lack action', () => {
+    it('prop no error', () => {
       const Component = {
         template: `
-                    <Can of = 'Plugin'>
+                    <Can do = 'update' on = 'Post'>
+                      <h1></h1>
+                    </Can>
+        `
+      };
+      const wrapper = mount(Component, {
+        localVue
+      });
+      spy.should.not.have.been.called();
+    });
+
+    it('prop no error', () => {
+      const Component = {
+        template: `
+                    <Can I = 'update' this = 'Post'>
+                      <h1></h1>
+                    </Can>
+        `
+      };
+      const wrapper = mount(Component, {
+        localVue
+      });
+      spy.should.not.have.been.called();
+    });
+
+    it('lack action prop', () => {
+      const Component = {
+        template: `
+                    <Can a = 'Plugin'>
+                      <h1></h1>
+                    </Can>
+        `
+      };
+      const wrapper = mount(Component, {
+        localVue
+      });
+      spy.should.have.been.called();
+    });
+
+    it('lack subject prop', () => {
+      const Component = {
+        template: `
+                    <Can I = 'read'>
                       <h1></h1>
                     </Can>
         `

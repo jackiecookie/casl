@@ -37,11 +37,11 @@ export default {
     } else {
       parent.$can(); // also create dependency
     }
-    const checkContext = {
-      ability: injections.ability,
-    ...props,                     // eslint-disable-line
-      $ability: parent.$ability,
-    };
+    const checkContext = Object.assign({
+      ability: injections.ability
+    }, props, {
+      $ability: parent.$ability
+    });
     return check.call(checkContext) && children.length > 1 ? children : children[0];
   }
 };
